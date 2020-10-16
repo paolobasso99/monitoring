@@ -10,6 +10,9 @@ scrape_configs:
       
   - job_name: 'node'
     metrics_path: /node-exporter/metrics
+    basic_auth:
+      username: user
+      password: password
     static_configs:
       - targets: 
          - 'monitoring-servername.example.com'
@@ -17,6 +20,9 @@ scrape_configs:
       
   - job_name: 'cadvisor'
     metrics_path: /cadvisor/metrics
+    basic_auth:
+      username: user
+      password: password
     static_configs:
       - targets: 
         - 'monitoring-servername.example.com'
@@ -34,6 +40,9 @@ scrape_configs:
          - 'grafana.example.com'
 
   - job_name: 'loki'
+    basic_auth:
+      username: user
+      password: password
     static_configs:
       - targets: 
          - 'loki.example.com'

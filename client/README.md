@@ -40,6 +40,6 @@ You may want to ship other logs using promtail.
 
 ### Installing containers
 1. Clone this repository
-2. Copy `.env.example` to `.env` and edit
+2. Copy `.env.example` to `.env` and edit. WARNING: It is suggested to use the same credentials for every client you setup in order to use only one Prometheus job.
 3. Edit `promtail/config/promtail-config.yml`
 4. Run `docker-compose up -d`
