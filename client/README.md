@@ -31,7 +31,8 @@ You may want to ship other logs using promtail.
     "log-driver": "loki",
     "log-opts": {
         "loki-url": "https://<user><password>@loki.example.com/loki/api/v1/push",
-        "loki-batch-size": "400"
+        "loki-batch-size": "400",
+        "loki-tenant-id": "servername"
     }
   }
   ```
