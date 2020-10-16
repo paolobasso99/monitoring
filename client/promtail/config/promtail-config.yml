@@ -5,7 +5,7 @@ server:
 clients:
   - url: https://loki.example.com/loki/api/v1/push
     basic_auth:
-      username: username
+      username: user
       password: password
 
 scrape_configs:

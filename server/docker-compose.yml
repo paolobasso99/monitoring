@@ -6,12 +6,13 @@ services:
     container_name: grafana
     user: "${PUID}:${PGID}"
     environment:
-      - GF_INSTALL_PLUGINS=grafana-worldmap-panel,mxswat-separator-panel,cloudflare-app,grafana-piechart-panel
+      - GF_INSTALL_PLUGINS=${GRAFANA_PLUGINS}
     volumes:
       - ./grafana:/var/lib/grafana
     restart: unless-stopped
     labels:
       - "traefik.enable=true"
+      - "traefik.http.routers.grafana.rule=Host(\"$GRAFANA_SUBDOMAIN.$DOMAIN\")"
       - "traefik.http.routers.grafana.service=grafana"
       - "traefik.http.routers.grafana.tls=true"
       - "traefik.http.routers.grafana.tls.certresolver=${TRAEFIK_CERTRESOLVER}"
@@ -32,6 +33,7 @@ services:
     restart: unless-stopped
     labels:
       - "traefik.enable=true"
+      - "traefik.http.routers.loki.rule=Host(\"$LOKI_SUBDOMAIN.$DOMAIN\")"
       - "traefik.http.routers.loki.service=loki"
       - "traefik.http.routers.loki.tls=true"
       - "traefik.http.routers.loki.tls.certresolver=${TRAEFIK_CERTRESOLVER}"
@@ -55,6 +57,7 @@ services:
     restart: unless-stopped
     labels:
       - "traefik.enable=true"
+      - "traefik.http.routers.prometheus.rule=Host(\"$PROMETHEUS_SUBDOMAIN.$DOMAIN\")"
       - "traefik.http.routers.prometheus.service=prometheus"
       - "traefik.http.routers.prometheus.tls=true"
       - "traefik.http.routers.prometheus.tls.certresolver=${TRAEFIK_CERTRESOLVER}"
@@ -70,7 +73,7 @@ services:
 
 networks:
   grafana:
-    network_mode: bridge
+    driver: bridge
   web_proxy:
     external:
       name: web_proxy

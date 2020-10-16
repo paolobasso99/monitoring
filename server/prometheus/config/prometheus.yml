@@ -9,12 +9,18 @@ scrape_configs:
       - targets: ['localhost:9090']
       
   - job_name: 'node'
+    metrics_path: /node-exporter/metrics
     static_configs:
-      - targets: ['node-exporter:9100']
+      - targets: 
+         - 'monitoring-servername.example.com'
+         - 'monitoring-servername.example.com'
       
   - job_name: 'cadvisor'
+    metrics_path: /cadvisor/metrics
     static_configs:
-      - targets: ['cadvisor:8080']
+      - targets: 
+        - 'monitoring-servername.example.com'
+        - 'monitoring-servername.example.com'
 
   - job_name: 'uptimerobot'
     scrape_interval: 5m
@@ -27,12 +33,12 @@ scrape_configs:
       - targets:
         - 'pihole-exporter:9707'
 
-  - job_name: 'mediabox'
-    static_configs:
-      - targets:
-        - 'jellyfin.example.com'
-        - 'sonarr-exporter:9707'
-        - 'radarr-exporter:9707'
-#        - 'lidarr-exporter:9707'
-        - 'deluge.example.com'
+  # - job_name: 'mediabox'
+  #   static_configs:
+  #     - targets:
+  #       - 'jellyfin.example.com'
+  #       - 'sonarr-exporter:9707'
+  #       - 'radarr-exporter:9707'
+  #       - 'lidarr-exporter:9707'
+  #       - 'deluge.example.com'
   

@@ -7,38 +7,38 @@ services:
     environment: 
       - PIHOLE_HOSTNAME=${PIHOLE_HOSTNAME}
       - PIHOLE_PASSWORD=${PIHOLE_PASSWORD}
-      - INTERVAL=${INTERVAL}
+      - INTERVAL=${PIHOLE_INTERVAL}
       - PORT=9707
     restart: unless-stopped
     networks:
       - prometheus_network
 
-  sonarr-exporter:
-    image: onedr0p/exportarr:master
-    container_name: sonarr-exporter
-    entrypoint: ["exportarr"]
-    command: ["sonarr"]
-    environment: 
-      - URL=${SONARR_URL}
-      - APIKEY=${SONARR_APIKEY}
-      - ENABLE_EPISODE_QUALITY_METRICS=true
-      - PORT=9707
-    restart: unless-stopped
-    networks:
-      - prometheus_network
+#   sonarr-exporter:
+#     image: onedr0p/exportarr:master
+#     container_name: sonarr-exporter
+#     entrypoint: ["exportarr"]
+#     command: ["sonarr"]
+#     environment: 
+#       - URL=${SONARR_URL}
+#       - APIKEY=${SONARR_APIKEY}
+#       - ENABLE_EPISODE_QUALITY_METRICS=true
+#       - PORT=9707
+#     restart: unless-stopped
+#     networks:
+#       - prometheus_network
 
-  radarr-exporter:
-    image: onedr0p/exportarr:master
-    container_name: radarr-exporter
-    entrypoint: ["exportarr"]
-    command: ["radarr"]
-    environment: 
-      - URL=${RADARR_URL}
-      - APIKEY=${RADARR_APIKEY}
-      - PORT=9707
-    restart: unless-stopped
-    networks:
-      - prometheus_network
+#   radarr-exporter:
+#     image: onedr0p/exportarr:master
+#     container_name: radarr-exporter
+#     entrypoint: ["exportarr"]
+#     command: ["radarr"]
+#     environment: 
+#       - URL=${RADARR_URL}
+#       - APIKEY=${RADARR_APIKEY}
+#       - PORT=9707
+#     restart: unless-stopped
+#     networks:
+#       - prometheus_network
       
 #  lidarr-exporter:
 #    image: onedr0p/exportarr:master

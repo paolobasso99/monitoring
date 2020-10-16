@@ -4,7 +4,8 @@ This is how I configured my monitoring stack. The setup consits of a centralized
 
 ## Prerequisites
 1. Docker on every machine
-2. Traefik on every machine
+2. Docker Compose on every machine
+3. Traefik on every machine
    
 ## Technologies used
 1. Docker
