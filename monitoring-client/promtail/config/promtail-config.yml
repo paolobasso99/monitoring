@@ -3,7 +3,10 @@ server:
   grpc_listen_port: 0
 
 clients:
-  - url: http://loki:3100/loki/api/v1/push
+  - url: https://loki.example.com/loki/api/v1/push
+    basic_auth:
+      username: username
+      password: password
 
 scrape_configs:
   - job_name: system
@@ -12,6 +15,6 @@ scrape_configs:
           - localhost
         labels:
           job: varlogs
-          host: monitoring-server
+          host: servername
           __path__: /var/log/*log
         

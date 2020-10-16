@@ -14,8 +14,8 @@ services:
       - "traefik.enable=true"
       - "traefik.http.routers.grafana.service=grafana"
       - "traefik.http.routers.grafana.tls=true"
-      - "traefik.http.routers.grafana.tls.certresolver=dns-cloudflare"
-      - "traefik.http.routers.grafana.entrypoints=websecure"
+      - "traefik.http.routers.grafana.tls.certresolver=${TRAEFIK_CERTRESOLVER}"
+      - "traefik.http.routers.grafana.entrypoints=${TRAEFIK_ENTRYPOINTS}"
       - "traefik.http.services.grafana.loadbalancer.server.port=3000"
     networks:
       - grafana
@@ -30,21 +30,20 @@ services:
       - ./loki/config:/config:ro
       - ./loki/data:/loki
     restart: unless-stopped
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.loki.service=loki"
+      - "traefik.http.routers.loki.tls=true"
+      - "traefik.http.routers.loki.tls.certresolver=${TRAEFIK_CERTRESOLVER}"
+      - "traefik.http.routers.loki.entrypoints=${TRAEFIK_ENTRYPOINTS}"
+      - "traefik.http.services.loki.loadbalancer.server.port=3100"
+      # Basic auth
+      - "traefik.http.routers.loki.middlewares=loki-auth"
+      - "traefik.http.middlewares.loki-auth.basicauth.users=$LOKI_USER_PASSWORD"
     networks:
       - grafana
       - loki
-
-  promtail:
-    image: grafana/promtail:1.6.1
-    container_name: promtail
-    command: -config.file=/config/promtail-config.yml
-    volumes:
-      - ./promtail/config:/config:ro
-      - ./promtail/data:/promtail
-      - /var/log:/var/log
-    restart: unless-stopped
-    networks:
-      - loki
+      - web_proxy
 
   prometheus:
     image: prom/prometheus
@@ -58,8 +57,8 @@ services:
       - "traefik.enable=true"
       - "traefik.http.routers.prometheus.service=prometheus"
       - "traefik.http.routers.prometheus.tls=true"
-      - "traefik.http.routers.prometheus.tls.certresolver=dns-cloudflare"
-      - "traefik.http.routers.prometheus.entrypoints=websecure"
+      - "traefik.http.routers.prometheus.tls.certresolver=${TRAEFIK_CERTRESOLVER}"
+      - "traefik.http.routers.prometheus.entrypoints=${TRAEFIK_ENTRYPOINTS}"
       - "traefik.http.services.prometheus.loadbalancer.server.port=9090"
       # Basic auth
       - "traefik.http.routers.prometheus.middlewares=prometheus-auth"
@@ -69,32 +68,12 @@ services:
       - prometheus
       - web_proxy
 
-  cadvisor:
-    image: gcr.io/google-containers/cadvisor:latest
-    container_name: cadvisor
-    volumes:
-      - /:/rootfs:ro
-      - /var/run:/var/run:ro
-      - /sys:/sys:ro
-      - /var/lib/docker/:/var/lib/docker:ro
-    restart: unless-stopped
-    networks:
-      - prometheus
-
-  node-exporter:
-    image: bitnami/node-exporter
-    container_name: node-exporter
-    restart: unless-stopped
-    networks:
-      - prometheus
-
 networks:
+  grafana:
+    network_mode: bridge
   web_proxy:
     external:
       name: web_proxy
-  grafana:
-    external:
-      name: grafana
   prometheus:
     external:
       name: prometheus
