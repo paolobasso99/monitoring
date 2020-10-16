@@ -22,6 +22,22 @@ scrape_configs:
         - 'monitoring-servername.example.com'
         - 'monitoring-servername.example.com'
 
+  - job_name: 'traefik'
+    static_configs:
+      - targets: 
+         - 'traefik-servername.example.com'
+         - 'traefik-servername.example.com'
+
+  - job_name: 'grafana'
+    static_configs:
+      - targets: 
+         - 'grafana.example.com'
+
+  - job_name: 'loki'
+    static_configs:
+      - targets: 
+         - 'loki.example.com'
+
   - job_name: 'uptimerobot'
     scrape_interval: 5m
     scrape_timeout: 30s
