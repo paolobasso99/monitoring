@@ -1,0 +1,103 @@
+version: "3"
+
+services:
+  grafana:
+    image: grafana/grafana
+    container_name: grafana
+    user: "${PUID}:${PGID}"
+    environment:
+      - GF_INSTALL_PLUGINS=grafana-worldmap-panel,mxswat-separator-panel,cloudflare-app,grafana-piechart-panel
+    volumes:
+      - ./grafana:/var/lib/grafana
+    restart: unless-stopped
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.grafana.service=grafana"
+      - "traefik.http.routers.grafana.tls=true"
+      - "traefik.http.routers.grafana.tls.certresolver=dns-cloudflare"
+      - "traefik.http.routers.grafana.entrypoints=websecure"
+      - "traefik.http.services.grafana.loadbalancer.server.port=3000"
+    networks:
+      - grafana
+      - web_proxy
+
+  loki:
+    image: grafana/loki:1.6.1
+    container_name: loki
+    user: "${PUID}:${PGID}"
+    command: -config.file=/config/loki-config.yml
+    volumes:
+      - ./loki/config:/config:ro
+      - ./loki/data:/loki
+    restart: unless-stopped
+    networks:
+      - grafana
+      - loki
+
+  promtail:
+    image: grafana/promtail:1.6.1
+    container_name: promtail
+    command: -config.file=/config/promtail-config.yml
+    volumes:
+      - ./promtail/config:/config:ro
+      - ./promtail/data:/promtail
+      - /var/log:/var/log
+    restart: unless-stopped
+    networks:
+      - loki
+
+  prometheus:
+    image: prom/prometheus
+    container_name: prometheus
+    user: "${PUID}:${PGID}"
+    volumes:
+      - ./prometheus/config:/etc/prometheus
+      - ./prometheus/data:/prometheus
+    restart: unless-stopped
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.prometheus.service=prometheus"
+      - "traefik.http.routers.prometheus.tls=true"
+      - "traefik.http.routers.prometheus.tls.certresolver=dns-cloudflare"
+      - "traefik.http.routers.prometheus.entrypoints=websecure"
+      - "traefik.http.services.prometheus.loadbalancer.server.port=9090"
+      # Basic auth
+      - "traefik.http.routers.prometheus.middlewares=prometheus-auth"
+      - "traefik.http.middlewares.prometheus-auth.basicauth.users=$PROMETHEUS_USER_PASSWORD"
+    networks:
+      - grafana
+      - prometheus
+      - web_proxy
+
+  cadvisor:
+    image: gcr.io/google-containers/cadvisor:latest
+    container_name: cadvisor
+    volumes:
+      - /:/rootfs:ro
+      - /var/run:/var/run:ro
+      - /sys:/sys:ro
+      - /var/lib/docker/:/var/lib/docker:ro
+    restart: unless-stopped
+    networks:
+      - prometheus
+
+  node-exporter:
+    image: bitnami/node-exporter
+    container_name: node-exporter
+    restart: unless-stopped
+    networks:
+      - prometheus
+
+networks:
+  web_proxy:
+    external:
+      name: web_proxy
+  grafana:
+    external:
+      name: grafana
+  prometheus:
+    external:
+      name: prometheus
+  loki:
+    external:
+      name: loki
