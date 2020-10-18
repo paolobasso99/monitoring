@@ -1,24 +1,33 @@
 version: "3"
 
 services:
-  pihole-exporter:
-    image: ekofr/pihole-exporter:latest
-    container_name: pihole-exporter
-    environment: 
-      - PIHOLE_HOSTNAME=${PIHOLE_HOSTNAME}
-      - PIHOLE_PASSWORD=${PIHOLE_PASSWORD}
-      - INTERVAL=${PIHOLE_INTERVAL}
-      - PORT=9707
+  uptimerobot-exporter:
+    image: ukwa/uptimerobot-prometheus-exporter
+    container_name: uptimerobot-exporter
+    environment:
+      - UPTIMEROBOT_API_KEY=${UPTIMEROBOT_API_KEY}
     restart: unless-stopped
     networks:
       - prometheus_network
+
+#   pihole-exporter:
+#     image: ekofr/pihole-exporter:latest
+#     container_name: pihole-exporter
+#     environment:
+#       - PIHOLE_HOSTNAME=${PIHOLE_HOSTNAME}
+#       - PIHOLE_PASSWORD=${PIHOLE_PASSWORD}
+#       - INTERVAL=${PIHOLE_INTERVAL}
+#       - PORT=9707
+#     restart: unless-stopped
+#     networks:
+#       - prometheus_network
 
 #   sonarr-exporter:
 #     image: onedr0p/exportarr:master
 #     container_name: sonarr-exporter
 #     entrypoint: ["exportarr"]
 #     command: ["sonarr"]
-#     environment: 
+#     environment:
 #       - URL=${SONARR_URL}
 #       - APIKEY=${SONARR_APIKEY}
 #       - ENABLE_EPISODE_QUALITY_METRICS=true
@@ -32,20 +41,20 @@ services:
 #     container_name: radarr-exporter
 #     entrypoint: ["exportarr"]
 #     command: ["radarr"]
-#     environment: 
+#     environment:
 #       - URL=${RADARR_URL}
 #       - APIKEY=${RADARR_APIKEY}
 #       - PORT=9707
 #     restart: unless-stopped
 #     networks:
 #       - prometheus_network
-      
+
 #  lidarr-exporter:
 #    image: onedr0p/exportarr:master
 #    container_name: lidarr-exporter
 #    entrypoint: ["exportarr"]
 #    command: ["lidarr"]
-#    environment: 
+#    environment:
 #      - URL=${LIDARR_URL}
 #      - APIKEY=${LIDARR_APIKEY}
 #      - PORT=9707
@@ -53,17 +62,7 @@ services:
 #    networks:
 #      - prometheus_network
 
-  uptimerobot-exporter:
-    image:  ukwa/uptimerobot-prometheus-exporter 
-    container_name: uptimerobot-exporter
-    environment: 
-      - UPTIMEROBOT_API_KEY=${UPTIMEROBOT_API_KEY}
-    restart: unless-stopped
-    networks:
-      - prometheus_network
-
 networks:
   prometheus_network:
-    external: 
+    external:
       name: ${PROMETHEUS_NETWORK}
-  

@@ -51,12 +51,13 @@ scrape_configs:
     scrape_interval: 5m
     scrape_timeout: 30s
     static_configs:
-      - targets: ['uptimerobot-exporter:9429']
+      - targets: 
+         - 'uptimerobot-exporter:9429'
       
-  - job_name: 'pihole'
-    static_configs:
-      - targets:
-        - 'pihole-exporter:9707'
+  # - job_name: 'pihole'
+  #   static_configs:
+  #     - targets:
+  #       - 'pihole-exporter:9707'
 
   # - job_name: 'mediabox'
   #   static_configs:
