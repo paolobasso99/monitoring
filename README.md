@@ -1,4 +1,6 @@
 # Monitoring Stack Configuration
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fpaolobasso99%2Fmonitoring.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2Fpaolobasso99%2Fmonitoring?ref=badge_shield)
+
 
 This is how I configured my monitoring stack. The setup consits of a centralized monitoring server and a monitoring client installed on every host.
 
@@ -21,3 +23,6 @@ See each folder to setup the relative components.
 8. Node Exporter
 9. cAdvisor
 10. Some other exporters...
+
+## License
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fpaolobasso99%2Fmonitoring.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2Fpaolobasso99%2Fmonitoring?ref=badge_large)
