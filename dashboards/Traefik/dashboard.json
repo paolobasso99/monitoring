@@ -16,7 +16,7 @@
   "gnetId": null,
   "graphTooltip": 0,
   "id": 11,
-  "iteration": 1603108567055,
+  "iteration": 1603115402471,
   "links": [
     {
       "asDropdown": true,
@@ -117,10 +117,6 @@
               {
                 "color": "green",
                 "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
               }
             ]
           }
@@ -177,10 +173,6 @@
               {
                 "color": "green",
                 "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
               }
             ]
           }
@@ -1025,10 +1017,6 @@
               {
                 "color": "green",
                 "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
               }
             ]
           }
@@ -1365,6 +1353,7 @@
         "allValue": null,
         "current": {
           "selected": true,
+          "tags": [],
           "text": [
             "All"
           ],
@@ -1450,9 +1439,9 @@
       {
         "allValue": null,
         "current": {
-          "selected": false,
-          "text": "cadvisor@docker",
-          "value": "cadvisor@docker"
+          "selected": true,
+          "text": "grafana@docker",
+          "value": "grafana@docker"
         },
         "datasource": "$prometheus",
         "definition": "label_values(traefik_service_requests_total{instance=~\"$instance\"}, service)",
@@ -1483,5 +1472,5 @@
   "timezone": "",
   "title": "Traefik",
   "uid": "wcJd635Mk",
-  "version": 15
+  "version": 16
 }

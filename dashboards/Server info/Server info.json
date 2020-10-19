@@ -17,7 +17,7 @@
   "gnetId": null,
   "graphTooltip": 0,
   "id": 8,
-  "iteration": 1603107763361,
+  "iteration": 1603115988463,
   "links": [
     {
       "asDropdown": true,
@@ -2799,7 +2799,7 @@
     "list": [
       {
         "current": {
-          "selected": false,
+          "selected": true,
           "text": [
             "All"
           ],
@@ -2823,7 +2823,7 @@
       {
         "allValue": null,
         "current": {
-          "selected": false,
+          "selected": true,
           "text": [
             "All"
           ],
@@ -2854,8 +2854,8 @@
         "allValue": null,
         "current": {
           "selected": false,
-          "text": "monitoring-op01.bassopaolo.com:80",
-          "value": "monitoring-op01.bassopaolo.com:80"
+          "text": "monitoring-hc01.bassopaolo.com:80",
+          "value": "monitoring-hc01.bassopaolo.com:80"
         },
         "datasource": "$prometheus",
         "definition": "label_values(node_uname_info{job=\"$job\"}, instance)",

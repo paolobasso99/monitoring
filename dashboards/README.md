@@ -1,2 +1,8 @@
 # Additional exporters
-There are the JSON of the Grafana dashboards which I created that consume Prometheus Metrics.
+There are the JSON files and the screenshots of the Grafana dashboards that I created.
+
+## Server info
+![Server info Dashboard](https://github.com/paolobasso99/monitoring/blob/main/dashboards/Server%20info/screenshot.png?raw=true)
+
+## Traefik
+![Traefik Dashboard](https://github.com/paolobasso99/monitoring/blob/main/dashboards/Traefik/screenshot.png?raw=true)
