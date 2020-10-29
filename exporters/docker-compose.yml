@@ -2,10 +2,13 @@ version: "3"
 
 services:
   uptimerobot-exporter:
-    image: ukwa/uptimerobot-prometheus-exporter
+    image: paolobasso/uptimerobot_exporter
     container_name: uptimerobot-exporter
     environment:
-      - UPTIMEROBOT_API_KEY=${UPTIMEROBOT_API_KEY}
+      - UPTIMEROBOT_READ_API_KEY=${UPTIMEROBOT_READ_API_KEY}
+      - INTERVAL_SECONDS=300
+      - LOG_LEVEL=INFO
+      - PORT=9707
     restart: unless-stopped
     networks:
       - prometheus_network
