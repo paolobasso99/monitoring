@@ -16,7 +16,7 @@
   "gnetId": null,
   "graphTooltip": 0,
   "id": 13,
-  "iteration": 1604062384192,
+  "iteration": 1604072362005,
   "links": [
     {
       "asDropdown": true,
@@ -465,7 +465,7 @@
       },
       "gridPos": {
         "h": 3,
-        "w": 5,
+        "w": 6,
         "x": 0,
         "y": 21
       },
@@ -531,7 +531,7 @@
       "gridPos": {
         "h": 3,
         "w": 6,
-        "x": 5,
+        "x": 6,
         "y": 21
       },
       "id": 18,
@@ -573,94 +573,9 @@
           },
           "mappings": [
             {
-              "from": "",
-              "id": 1,
-              "text": "Never",
-              "to": "",
-              "type": 1,
-              "value": "null"
-            }
-          ],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 0
-              },
-              {
-                "color": "orange",
-                "value": 43200
-              },
-              {
-                "color": "green",
-                "value": 86400
-              }
-            ]
-          },
-          "unit": "s"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 3,
-        "w": 5,
-        "x": 11,
-        "y": 21
-      },
-      "id": 19,
-      "options": {
-        "colorMode": "background",
-        "graphMode": "none",
-        "justifyMode": "auto",
-        "orientation": "auto",
-        "reduceOptions": {
-          "calcs": [
-            "last"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "textMode": "value_and_name"
-      },
-      "pluginVersion": "7.2.1",
-      "targets": [
-        {
-          "expr": "time() - timestamp(uptimerobot_monitor_status{job=~\"$job\",name=\"$service\"} > 3)",
-          "interval": "",
-          "legendFormat": "Last downtime",
-          "refId": "A"
-        }
-      ],
-      "timeFrom": null,
-      "timeShift": null,
-      "title": "",
-      "type": "stat"
-    },
-    {
-      "datasource": null,
-      "fieldConfig": {
-        "defaults": {
-          "custom": {
-            "align": null,
-            "filterable": false
-          },
-          "mappings": [
-            {
-              "from": "-10",
-              "id": 1,
-              "text": "Paused",
-              "to": "0.4",
-              "type": 2
-            },
-            {
-              "from": "0.5",
+              "from": "0",
               "id": 2,
-              "text": "Not checked",
+              "text": "Down",
               "to": "1.4",
               "type": 2
             },
@@ -668,22 +583,22 @@
               "from": "1.5",
               "id": 3,
               "text": "Up",
-              "to": "6.9",
+              "to": "97",
               "type": 2,
               "value": ""
             },
             {
-              "from": "7",
+              "from": "97.1",
               "id": 4,
-              "text": "Seems down",
-              "to": "8.4",
+              "text": "Started",
+              "to": "98.4",
               "type": 2
             },
             {
-              "from": "8.5",
+              "from": "98.4",
               "id": 5,
-              "text": "Down",
-              "to": "20",
+              "text": "Paused",
+              "to": "100",
               "type": 2
             }
           ],
@@ -691,16 +606,16 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "orange",
+                "color": "red",
                 "value": null
               },
               {
                 "color": "green",
-                "value": 1.5
+                "value": 1.4
               },
               {
-                "color": "red",
-                "value": 7
+                "color": "#EAB839",
+                "value": 98.4
               }
             ]
           }
@@ -710,7 +625,7 @@
       "gridPos": {
         "h": 3,
         "w": 4,
-        "x": 16,
+        "x": 12,
         "y": 21
       },
       "id": 26,
@@ -764,7 +679,7 @@
       "gridPos": {
         "h": 3,
         "w": 4,
-        "x": 20,
+        "x": 16,
         "y": 21
       },
       "id": 24,
@@ -787,7 +702,85 @@
         {
           "expr": "uptimerobot_monitor_log_datetime{job=~\"$job\",name=\"$service\"}*1000",
           "interval": "",
-          "legendFormat": "Las log",
+          "legendFormat": "Las log start",
+          "refId": "A"
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "",
+      "type": "stat"
+    },
+    {
+      "datasource": null,
+      "fieldConfig": {
+        "defaults": {
+          "custom": {
+            "align": null,
+            "filterable": false
+          },
+          "mappings": [
+            {
+              "from": "",
+              "id": 1,
+              "text": "Never",
+              "to": "",
+              "type": 1,
+              "value": "null"
+            }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 0
+              },
+              {
+                "color": "orange",
+                "value": 43200
+              },
+              {
+                "color": "green",
+                "value": 86400
+              }
+            ]
+          },
+          "unit": "s"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 4,
+        "x": 20,
+        "y": 21
+      },
+      "id": 19,
+      "options": {
+        "colorMode": "background",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "last"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "value_and_name"
+      },
+      "pluginVersion": "7.2.1",
+      "targets": [
+        {
+          "expr": "time() - uptimerobot_monitor_log_datetime{job=~\"$job\",name=\"$service\"}",
+          "interval": "",
+          "legendFormat": "Last log duration",
           "refId": "A"
         }
       ],
@@ -1000,28 +993,6 @@
         "align": false,
         "alignLevel": null
       }
-    },
-    {
-      "datasource": null,
-      "fieldConfig": {
-        "defaults": {
-          "custom": {}
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 4,
-        "w": 24,
-        "x": 0,
-        "y": 35
-      },
-      "id": 28,
-      "pluginVersion": "7.2.1",
-      "timeFrom": null,
-      "timeShift": null,
-      "title": "",
-      "transparent": true,
-      "type": "mxswat-separator-panel"
     }
   ],
   "refresh": false,
@@ -1099,8 +1070,8 @@
         "allValue": null,
         "current": {
           "selected": true,
-          "text": "Mediabox OMBI",
-          "value": "Mediabox OMBI"
+          "text": "Firefly",
+          "value": "Firefly"
         },
         "datasource": "$prometheus",
         "definition": "label_values(uptimerobot_monitor_status{job=\"$job\"}, name)",
@@ -1131,5 +1102,5 @@
   "timezone": "",
   "title": "UptimeRobot",
   "uid": "31D0565Gz",
-  "version": 10
+  "version": 13
 }
