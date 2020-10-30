@@ -6,3 +6,6 @@ There are the JSON files and the screenshots of the Grafana dashboards that I cr
 
 ## Traefik
 ![Traefik Dashboard](https://github.com/paolobasso99/monitoring/blob/main/dashboards/Traefik/screenshot.png?raw=true)
+
+## UptimeRobot
+![UptimeRobot](https://github.com/paolobasso99/monitoring/blob/main/dashboards/UptimeRobot/screenshot.png?raw=true)
